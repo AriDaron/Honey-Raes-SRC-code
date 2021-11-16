@@ -1,12 +1,13 @@
+//  This is my new 'MAIN' js
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { Repairs } from "./components/Repairs";
 import reportWebVitals from './reportWebVitals';
-
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* render Repairs.js to the HTML */}
+<Repairs />  
   </React.StrictMode>,
   document.getElementById('root')
 );
