@@ -40,6 +40,7 @@ export const CustomerList = () => {
     )
 
     // you can only return 1 element (one scope)
+    // return the number of total customers but only show 5 
     return (
         <>
         <div>{TotalCustomerMessage}</div>

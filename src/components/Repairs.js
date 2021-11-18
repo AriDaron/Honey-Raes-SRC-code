@@ -1,21 +1,35 @@
-import React from "react"
-import { CustomerList } from "./customers/CustomerList";
-import { EmployeeList } from "./employees/EmployeeList";
-import { TicketList } from "./serviceTickets/TicketList";
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import { ApplicationViews } from "./ApplicationViews";
+import { NavBar } from "./Nav/NavBar";
+import { Login } from "./auth/Login";
+import { Register } from "./auth/Register";
+import "./Repairs.css";
 
-// HTML thats generated in the browser . referred to as JSX for react. converts JSX to javascript 
-export const Repairs = () => {
-    return (
-        <>
-            <h1> Honey Rae's Repair Shop </h1>
 
-            <h2>Customer List </h2>
-            <CustomerList />  
-            
-            <h2>Employee List </h2>
-            <EmployeeList />
-            <h2>Service Tickets  </h2>
-            <TicketList />
-        </>
-    )
-}
+
+export const Repairs = () => (
+  <>
+    <Route
+      render={() => {
+        if (localStorage.getItem("honey_customer")) {
+          return (
+            <>
+              <NavBar />
+              <ApplicationViews />
+            </>
+          );
+        } else {
+          return <Redirect to="/login" />;
+        }
+      }}
+    />
+
+    <Route path="/login">
+      <Login />
+    </Route>
+    <Route path="/register">
+      <Register />
+    </Route>
+  </>
+);
