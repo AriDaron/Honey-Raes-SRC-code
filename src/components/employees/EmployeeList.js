@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react"
-
+import { useHistory } from "react-router"
 
 export const EmployeeList = () => {
     const [employees, changeEmployee] = useState([])
     const [specialties, setSpecial] = useState("")
+    const [active, setActive] = useState("")
+
+    const history = useHistory()
 
 
     //useEffect() When state changes it invokes a function. like an event listener. used to watch specific state variables and define logic that should run when that state changes 
@@ -13,7 +16,7 @@ export const EmployeeList = () => {
     useEffect(
         () => {
             fetch("http://localhost:8088/employees")
-                .then(res => res.json())
+                .then(res => res.json()) 
                 .then((data) => {
                     changeEmployee(data)
                 })
@@ -34,6 +37,9 @@ export const EmployeeList = () => {
 
     return (
         <>
+            <button onClick={() => history.push("/employee/create")}> Hire Employee </button>
+            {active}
+            
             <div>
                 Specialties: {specialties}
             </div>

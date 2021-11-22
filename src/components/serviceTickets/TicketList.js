@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
+import { useHistory } from "react-router"
 
 
 export const TicketList = () => {
     const [tickets, changeTickets] = useState([])
-    const [totalServiceTickets, updateMessage] = useState("") 
-
+    const [active, setActive] = useState("")
+    const history= useHistory()
     //useEffect() When state changes it invokes a function. like an event listener. 
     //used to watch specific state variables and define logic that should run when that state changes 
     //go get data from API and pull it into application state with fetch 
@@ -23,28 +24,24 @@ export const TicketList = () => {
 
     useEffect(
         () => {
-            if (tickets.length===1) {
-                updateMessage("You have 1 open service ticket")   
-            }
-            else {
-                updateMessage(`You have ${tickets.length} open Service tickets`)
-            }
-    
-        },
-        [tickets]
-    )
+            const activeTicketCount =tickets.filter(t => t.dateCompleted ==="").length
+            setActive(`There are ${activeTicketCount} open tickets to review`)
+        },[tickets])
 
 
     return (
         // <> fragment putting all return elements into one JSX elemne t
         <>
-    <div>{totalServiceTickets}</div>
+            <button onClick={()=> history.push("/ticket/create")}> Create a New Ticket </button>
+            {active}
             {
                 //iterate locations and convert object to JXS 
                 tickets.map(
                     (ticket) => {
                         return <div key={`ticket--${ticket.id}`}>
-                            <p> {ticket.description} submitted by
+                            <p className={`ticket ${ticket.emergency ? 'emergency' : ''}`}>
+                                {ticket.emergency ? "" : ""}
+                                 {ticket.description} submitted by
                                 {ticket.customer.name} and worked on by {ticket.employee.name} </p>
                         </div>
                     }
