@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router"
-
+import { Link } from "react-router-dom"
+import "./Tickets.css"
 
 export const TicketList = () => {
     const [tickets, changeTickets] = useState([])
@@ -18,7 +19,7 @@ export const TicketList = () => {
                     changeTickets(data)
                 })
         },
-        // leave DEPENDANCY ARRAY EMPTY , or infinite loop 
+        // leave DEPENDANCY ARRAY EMPTY , or infinite loop  
         []
     )
 
@@ -32,16 +33,18 @@ export const TicketList = () => {
     return (
         // <> fragment putting all return elements into one JSX elemne t
         <>
+       
             <button onClick={()=> history.push("/ticket/create")}> Create a New Ticket </button>
             {active}
+        
             {
                 //iterate locations and convert object to JXS 
                 tickets.map(
                     (ticket) => {
                         return <div key={`ticket--${ticket.id}`}>
-                            <p className={`ticket ${ticket.emergency ? 'emergency' : ''}`}>
-                                {ticket.emergency ? "" : ""}
-                                 {ticket.description} submitted by
+                            <p className={`ticket ${ticket.emergency ? "emergency" : ""}`}>
+                                {ticket.emergency ? "🚑" : ""}
+                               <Link to={`/tickets/${ticket.id}`}>{ticket.description}</Link> submitted by
                                 {ticket.customer.name} and worked on by {ticket.employee.name} </p>
                         </div>
                     }
@@ -51,4 +54,11 @@ export const TicketList = () => {
     )
 }
 
+//use the Link component from react to convert description into a hyperlink.  the to= attritbute is a Dynamic Route to where you
+//want the user rerouted upon click. 
+
+
+{/* <p className={`ticket`}>
+    {ticket.emergency ? "🚑" : ""} {ticket.description} submitted by {ticket.customer.name} and worked on by {ticket.employee.name}
+</p> */}
 

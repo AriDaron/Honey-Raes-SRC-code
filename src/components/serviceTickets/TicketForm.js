@@ -69,7 +69,7 @@ export const TicketForm = () => {
                         } />
                 </div>
             </fieldset>
-            <button onClick={saveTicket} className="btn btn-primary" >
+            <button onClick={saveTicket} className="btn btn-primary" onClick={saveTicket}>
                 Submit Ticket
             </button>
         </form>

@@ -8,28 +8,28 @@ import "./Repairs.css";
 
 
 
-export const Repairs = () => (
-  <>
-    <Route
-      render={() => {
-        if (localStorage.getItem("honey_customer")) {
-          return (
-            <>
-              <NavBar />
-              <ApplicationViews />
-            </>
-          );
-        } else {
-          return <Redirect to="/login" />;
-        }
-      }}
-    />
+export const Repairs = () => {
+    return <>
+        <Route
+            render={() => {
+                if (localStorage.getItem("honey_customer")) {
+                    return (
+                        <>
+                            <NavBar />
+                            <ApplicationViews />
+                        </>
+                    );
+                } else {
+                    return <Redirect to="/login" />;
+                }
+            }}
+        />
 
-    <Route path="/login">
-      <Login />
-    </Route>
-    <Route path="/register">
-      <Register />
-    </Route>
-  </>
-);
+        <Route path="/login">
+            <Login />
+        </Route>
+        <Route path="/register">
+            <Register />
+        </Route>
+    </>
+};
